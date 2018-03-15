@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+    MyCallback
+{% endblock %}
+
+{% block page_content %}
+    {% if current_user.is_authenticated %}
+        <div class="row">
+            <div class="col-md-4">
+                Welcome to the create new users page. You may create new users here.
+                {{ wtf.quick_form(form) }}
+                <hr>
+            </div>
+        </div>
+    {% else %}
+        You need to login for using this tab.
+    {% endif %}
+{% endblock %}
