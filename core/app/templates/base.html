@@ -27,6 +27,9 @@
             <ul class="nav navbar-nav">
                 <li><a class="navbar-brand" href="{{ url_for('create_users.create_users_view') }}">Users</a></li>
             </ul>
+            <ul class="nav navbar-nav">
+                <li><a class="navbar-brand" href="{{ url_for('country_dict.country_dict') }}">Countries</a></li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %}
                     <li><a href="{{ url_for('auth.logout') }}"><font size="4">Log Out</font></a></li>

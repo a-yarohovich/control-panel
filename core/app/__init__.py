@@ -33,12 +33,14 @@ def create_app(config_name):
         host=app.config["PG_DATABASE_HOST"]
     )
     LOG.info("Print config:{}".format(pprint.pformat(app.config)))
-    from .main import main as main_blueprint
-    from .auth import auth as auth_blueprint
     from .cdr import cdr
     from .create_users import bl_create_users
-    app.register_blueprint(main_blueprint)
-    app.register_blueprint(auth_blueprint, url_prexfix='/auth')
+    from .country_dict import blcountry_dict
+    from .main import main
+    from .auth import auth
+    app.register_blueprint(main, url_prefix='/')
+    app.register_blueprint(auth, url_prefix='/auth')
     app.register_blueprint(cdr, url_prefix='/cdr')
+    app.register_blueprint(blcountry_dict, url_prefix='/country_dict')
     app.register_blueprint(bl_create_users, url_prefix="/create_users")
     return app

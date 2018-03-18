@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+    MyCallback
+{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-4">
+            {% if current_user.is_authenticated %}
+                {{ wtf.quick_form(form) }}
+            {% else %}
+                You need to login for using this tab.
+            {% endif %}
+        </div>
+    </div>
+    <style>
+        .pagination-page-info {
+            padding: .6em;
+            padding-left: 0;
+            width: 40em;
+            margin: .5em;
+            margin-left: 0;
+            font-size: 18px;
+        }
+        .pagination-page-info b {
+            color: black;
+            background: #a5c9f3;
+            padding-left: 2px;
+            padding: .1em .25em;
+            font-size: 100%;
+        }
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #BFBFBF;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+
+    {% if current_user.is_authenticated and pagination is defined %}
+        {{ pagination.info }}
+        <table>
+            <tr>
+              <th>ficountry_id</th>
+              <th>fsiso_3166_alpha2</th>
+              <th>fscountry_full</th>
+            </tr>
+            {% for country in countries %}
+              <tr>
+                <td>{{ country[0] }}</td>
+                <td>{{ country[1] }}</td>
+                <td>{{ country[2] }}</td>
+              </tr>
+            {% endfor %}
+        </table>
+        {{ pagination.links }}
+    {% endif %}
+
+{% endblock %}
