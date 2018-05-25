@@ -6,13 +6,13 @@ from flask_mail import Mail
 from flask_moment import Moment
 from config import config
 from logger import logger
-from .db_adapter import MyPgConnection
+from db_adapter import db_adapter
 
 LOG = logger.LOG
 bootstrap = Bootstrap()
 mail = Mail()
 moment = Moment()
-db_conn = MyPgConnection()
+db_conn = db_adapter.MyPgConnection()
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'auth.login'
@@ -38,9 +38,11 @@ def create_app(config_name):
     from .country_dict import blcountry_dict
     from .main import main
     from .auth import auth
+    from .services import serv_bl
     app.register_blueprint(main, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/auth')
     app.register_blueprint(cdr, url_prefix='/cdr')
     app.register_blueprint(blcountry_dict, url_prefix='/country_dict')
     app.register_blueprint(bl_create_users, url_prefix="/create_users")
+    app.register_blueprint(serv_bl, url_prefix="/services")
     return app

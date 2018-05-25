@@ -5,6 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/core" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/logger" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/app" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/db_adapter" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

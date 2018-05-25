@@ -1,3 +1,6 @@
 [submodule "logger"]
 	path = logger
 	url = git@github.com:a-yarohovich/logger.git
+[submodule "db_adapter"]
+	path = db_adapter
+	url = git@github.com:a-yarohovich/db_adapter.git

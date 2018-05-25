@@ -47,4 +47,4 @@ def country_dict():
             pagination=pagination,
             form=form
         )
-    return render_template('cdr/cdr_view.html', form=form)
+    return render_template('cdr/serv_view.html', form=form)
