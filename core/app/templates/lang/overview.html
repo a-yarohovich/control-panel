@@ -2,25 +2,16 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}
-    MyCallback
+    Languages
 {% endblock %}
 
 {% block page_content %}
-    <div class="row">
-        <div class="col-md-4">
-            {% if current_user.is_authenticated %}
-                {{ wtf.quick_form(form) }}
-            {% else %}
-                You need to login for using this tab.
-            {% endif %}
-        </div>
-    </div>
-    <style>
+   <style>
         .pagination-page-info {
             padding: .6em;
             padding-left: 0;
-            width: 40em;
-            margin: .5em;
+            width: 30em;
+            margin: .10em;
             margin-left: 0;
             font-size: 18px;
         }
@@ -28,19 +19,19 @@
             color: black;
             background: #a5c9f3;
             padding-left: 2px;
-            padding: .1em .25em;
+            padding: .1em .15em;
             font-size: 100%;
         }
         table {
             font-family: arial, sans-serif;
             border-collapse: collapse;
-            width: 100%;
+            width: 80%;
         }
 
         td, th {
             border: 1px solid #BFBFBF;
             text-align: left;
-            padding: 8px;
+            padding: 6px;
         }
 
         tr:nth-child(even) {
@@ -49,22 +40,37 @@
     </style>
 
     {% if current_user.is_authenticated and pagination is defined %}
+      <form method="post">
+          {{ form.csrf_token }}
+          <div class="row">
+            <div class="col-md-4">
+                {{ form.submit_add }}
+                {{ form.submit_delete }}
+                {{ form.submit_edit }}
+            </div>
+          </div>
         {{ pagination.info }}
         <table>
             <tr>
-              <th>ficountry_id</th>
-              <th>fsiso_3166_alpha2</th>
-              <th>fscountry_full</th>
+              <th>#</th>
+              <th>Select</th>
+              <th>ID</th>
+              <th>ISO 639.1</th>
+              <th>Description</th>
             </tr>
-            {% for country in countries %}
+            {% for lang in render_lst %}
               <tr>
-                <td>{{ country[0] }}</td>
-                <td>{{ country[1] }}</td>
-                <td>{{ country[2] }}</td>
+                <td>{{ loop.index }}</td>
+                <td><input type="checkbox" name="selected_lang" value="{{ lang.filang_id }}"></td>
+                <td>{{ lang.filang_id }}</td>
+                <td>{{ lang.fslang_iso639_1 }}</td>
+                <td>{{ lang.fslang_desc }}</td>
               </tr>
             {% endfor %}
         </table>
         {{ pagination.links }}
+      </form>
+    {% else %}
+        You have to login first.
     {% endif %}
-
 {% endblock %}

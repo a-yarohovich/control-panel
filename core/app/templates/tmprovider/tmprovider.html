@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+    Providers
+{% endblock %}
+
+{% block page_content %}
+   <style>
+        .pagination-page-info {
+            padding: .6em;
+            padding-left: 0;
+            width: 30em;
+            margin: .10em;
+            margin-left: 0;
+            font-size: 18px;
+        }
+        .pagination-page-info b {
+            color: black;
+            background: #a5c9f3;
+            padding-left: 2px;
+            padding: .1em .15em;
+            font-size: 100%;
+        }
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        td, th {
+            border: 1px solid #BFBFBF;
+            text-align: left;
+            padding: 6px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+
+    {% if current_user.is_authenticated and pagination is defined %}
+      <form method="post">
+          {{ form.csrf_token }}
+          <div class="row">
+            <div class="col-md-4">
+                {{ form.submit_add }}
+                {{ form.submit_delete }}
+                {{ form.submit_edit }}
+            </div>
+          </div>
+        {{ pagination.info }}
+        <table>
+            <tr>
+              <th>#</th>
+              <th>Select</th>
+              <th>ID</th>
+              <th>Status</th>
+              <th>Code</th>
+              <th>Start date</th>
+              <th>End date</th>
+              <th>Description</th>
+            </tr>
+            {% for prov in prov_lst %}
+              <tr>
+                <td>{{ loop.index }}</td>
+                <td><input type="checkbox" name="selected_prov" value="{{ prov.fiprovider_id }}"></td>
+                <td>{{ prov.fiprovider_id }}</td>
+                <td>{{ prov.fiprov_status }}</td>
+                <td>{{ prov.fsprovider_code }}</td>
+                <td>{{ prov.fdstart_date }}</td>
+                <td>{{ prov.fdend_date }}</td>
+                <td>{{ prov.fsdesc }}</td>
+              </tr>
+            {% endfor %}
+        </table>
+        {{ pagination.links }}
+      </form>
+    {% else %}
+        You have to login first.
+    {% endif %}
+{% endblock %}

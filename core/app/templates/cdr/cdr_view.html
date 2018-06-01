@@ -17,9 +17,9 @@
     </div>
     <style>
         .pagination-page-info {
-            padding: .6em;
+            padding:  20px;
             padding-left: 0;
-            width: 40em;
+            width: 10em;
             margin: .5em;
             margin-left: 0;
             font-size: 18px;
@@ -55,16 +55,26 @@
               <th>#</th>
               <th>context_id</th>
               <th>call_id</th>
+              <th>platform_id</th>
+              <th>product_id</th>
+              <th>account_id</th>
               <th>calling_number</th>
               <th>called_number</th>
               <th>answer_time</th>
               <th>destroy_time</th>
-              <th>create_time</th>
+              <th>duration</th>
               <th>end_reason</th>
+              <th>tariff_id</th>
+              <th>provider_id</th>
+              <th>service_id</th>
+              <th>region_prefix</th>
+              <th>call_info</th>
+              <th>sum</th>
             </tr>
             {% for cdr in cdrs %}
               <tr>
                 <td>{{ loop.index }}</td>
+                <td>{{ cdr[0] }}</td>
                 <td>{{ cdr[1] }}</td>
                 <td>{{ cdr[2] }}</td>
                 <td>{{ cdr[3] }}</td>
@@ -73,6 +83,15 @@
                 <td>{{ cdr[6] }}</td>
                 <td>{{ cdr[7] }}</td>
                 <td>{{ cdr[8] }}</td>
+                <td>{{ cdr[9] }}</td>
+                <td>{{ cdr[10] }}</td>
+                <td>{{ cdr[11] }}</td>
+                <td>{{ cdr[12] }}</td>
+                <td>{{ cdr[13] }}</td>
+                <td>{{ cdr[14] }}</td>
+                <td>{{ cdr[15] }}</td>
+                <td>{{ cdr[16] }}</td>
+                <td>{{ cdr[17] }}</td>
               </tr>
             {% endfor %}
         </table>

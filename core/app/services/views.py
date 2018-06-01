@@ -23,7 +23,7 @@ def services():
             else:
                 for serv in serv_lst:
                     if serv.fiservice_id == int(selected_serv[0]):
-                        session["editserv"] = {
+                        session["to_edit"] = {
                             "fiservice_id": serv.fiservice_id,
                             "fiservice_status": serv.fiservice_status,
                             "fsserv_desc": serv.fsserv_desc,
@@ -58,22 +58,22 @@ def update():
     form = ServWizard()
     form.status_selector.choices = [(200, "Active"), (300, "Not active")]
     try:
-        editserv = Service.from_dict(session["editserv"])
+        to_edit = Service.from_dict(session["to_edit"])
         if form.validate_on_submit():
             if Service.write(
                 fiservice_status=form.status_selector.data,
                 fsserv_desc=form.desc.data,
                 fsserv_code=form.serv_code.data,
-                fiservice_id=editserv.fiservice_id
+                fiservice_id=to_edit.fiservice_id
             ):
-                del session["editserv"]
+                del session["to_edit"]
                 return redirect(url_for("services.services"))
             else:
                 raise ValueError("Failed to update service: {}".format(form.serv_code))
-        form.status_selector.default = editserv.fiservice_status
+        form.status_selector.default = to_edit.fiservice_status
         form.process()
-        form.desc.data = editserv.fsserv_desc
-        form.serv_code.data = editserv.fsserv_code
+        form.desc.data = to_edit.fsserv_desc
+        form.serv_code.data = to_edit.fsserv_code
     except Exception as ex:
         LOG.error(LOG.exmsg(ex))
         flash("Something went wrong!")

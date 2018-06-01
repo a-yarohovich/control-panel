@@ -2,14 +2,16 @@ from flask_wtf import FlaskForm
 from wtforms import *
 
 
-class ServHandleForm(FlaskForm):
+class LangHandleForm(FlaskForm):
     submit_delete = SubmitField("Delete")
     submit_add = SubmitField("Create")
     submit_edit = SubmitField("Edit")
 
 
-class ServWizard(FlaskForm):
-    status_selector = SelectField("Status", coerce=int)
+class LangWizard(FlaskForm):
     desc = StringField("Description")
-    serv_code = StringField("Service code", [validators.DataRequired(message="Field is required")])
+    lang_iso639_1 = StringField(
+        "ISO 639.1",
+        validators=[validators.DataRequired("Field is required"), validators.Length(2, 2)]
+    )
     submit = SubmitField("Save")

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+    Accounts
+{% endblock %}
+
+{% block page_content %}
+    {% if current_user.is_authenticated %}
+        <div class="row">
+            <div class="col-md-4">
+                 {{ wtf.quick_form(form) }}
+            </div>
+        </div>
+    {% else %}
+        You have to login for using this tab.
+    {% endif %}
+{% endblock %}

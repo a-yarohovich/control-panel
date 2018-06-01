@@ -35,14 +35,16 @@ def create_app(config_name):
     LOG.info("Print config:{}".format(pprint.pformat(app.config)))
     from .cdr import cdr
     from .create_users import bl_create_users
-    from .country_dict import blcountry_dict
+    from .provider import provider_bl
     from .main import main
     from .auth import auth
     from .services import serv_bl
+    from .lang import lang_bl
     app.register_blueprint(main, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/auth')
     app.register_blueprint(cdr, url_prefix='/cdr')
-    app.register_blueprint(blcountry_dict, url_prefix='/country_dict')
+    app.register_blueprint(provider_bl, url_prefix='/provider')
     app.register_blueprint(bl_create_users, url_prefix="/create_users")
     app.register_blueprint(serv_bl, url_prefix="/services")
+    app.register_blueprint(lang_bl, url_prefix="/lang")
     return app
